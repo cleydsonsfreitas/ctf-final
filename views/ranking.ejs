@@ -1,0 +1,41 @@
+<div class="ranking-page">
+  <div class="page-header">
+    <h1>Ranking</h1>
+    <div class="user-ranking-large">
+      <span>Sua Posição: <strong>#<%= userRank %></strong></span>
+      <span>Pontuação: <strong><%= user.total_score %></strong></span>
+    </div>
+  </div>
+
+  <div class="ranking-table-container">
+    <table class="ranking-table">
+      <thead>
+        <tr>
+          <th>Pos.</th>
+          <th>Usuário</th>
+          <th>Pontuação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% ranking.forEach((u, index) => { %>
+        <tr class="<%= u.id === user.id ? 'current-user' : '' %>">
+          <td><%= index + 1 %></td>
+          <td>
+            <% if (u.id === user.id) { %>
+            <strong><%= u.username %> (você)</strong>
+            <% } else { %>
+            <%= u.username %>
+            <% } %>
+          </td>
+          <td><%= u.total_score %></td>
+        </tr>
+        <% }) %>
+        <% if (ranking.length === 0) { %>
+        <tr>
+          <td colspan="3" class="empty-state">Nenhum usuário no ranking ainda</td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>

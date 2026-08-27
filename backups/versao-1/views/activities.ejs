@@ -1,0 +1,35 @@
+<div class="activities-page">
+  <div class="page-header">
+    <h1>Atividades</h1>
+    <p class="page-subtitle">Escolha um desafio para começar</p>
+  </div>
+
+  <div class="categories">
+    <section class="category-section">
+      <h2 class="category-title difficulty-facil">Fácil <span class="badge"><%= challenges.filter(c => c.difficulty === 'Facil').length %> desafios</span></h2>
+      <div class="challenges-grid">
+        <% challenges.filter(c => c.difficulty === 'Facil').forEach(challenge => { %>
+        <%- include('partials/challenge-card', { challenge, solved: solvedIds.has(challenge.id) }) %>
+        <% }) %>
+      </div>
+    </section>
+
+    <section class="category-section">
+      <h2 class="category-title difficulty-normal">Normal <span class="badge"><%= challenges.filter(c => c.difficulty === 'Normal').length %> desafios</span></h2>
+      <div class="challenges-grid">
+        <% challenges.filter(c => c.difficulty === 'Normal').forEach(challenge => { %>
+        <%- include('partials/challenge-card', { challenge, solved: solvedIds.has(challenge.id) }) %>
+        <% }) %>
+      </div>
+    </section>
+
+    <section class="category-section">
+      <h2 class="category-title difficulty-dificil">Difícil <span class="badge"><%= challenges.filter(c => c.difficulty === 'Dificil').length %> desafio</span></h2>
+      <div class="challenges-grid">
+        <% challenges.filter(c => c.difficulty === 'Dificil').forEach(challenge => { %>
+        <%- include('partials/challenge-card', { challenge, solved: solvedIds.has(challenge.id) }) %>
+        <% }) %>
+      </div>
+    </section>
+  </div>
+</div>

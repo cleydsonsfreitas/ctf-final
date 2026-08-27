@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title || 'CTF Fernando' %></title>
+  <link rel="stylesheet" href="/css/main.css">
+  <%- include('partials/head') %>
+</head>
+<body>
+  <div class="app-container">
+    <header class="header">
+      <div class="header-content">
+        <h1 class="logo">CTF FERNANDO</h1>
+        <% if (user) { %>
+        <nav class="header-nav">
+          <a href="/dashboard" class="nav-btn <%= currentPage === 'dashboard' ? 'active' : '' %>">Início</a>
+          <a href="/ranking" class="nav-btn <%= currentPage === 'ranking' ? 'active' : '' %>">Ranking</a>
+          <a href="/activities" class="nav-btn <%= currentPage === 'activities' ? 'active' : '' %>">Atividades</a>
+          <form action="/logout" method="POST" style="display:inline">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit" class="nav-btn logout-btn">Log-out</button>
+          </form>
+        </nav>
+        <% } %>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <%- body %>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>CTF Fernando</h4>
+          <p>Plataforma de Capture The Flag para fins educacionais</p>
+        </div>
+        <div class="footer-section">
+          <h4>Links Institucionais</h4>
+          <ul>
+            <li><a href="#" target="_blank">Instituição</a></li>
+            <li><a href="#" target="_blank">Curso</a></li>
+            <li><a href="#" target="_blank">Regulamento</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contato</h4>
+          <ul>
+            <li>Email: contato@ctffernando.com</li>
+            <li>GitHub: github.com/ctf-fernando</li>
+            <li>Discord: discord.gg/ctf-fernando</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 CTF Fernando. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+  </div>
+  <script src="/js/main.js"></script>
+  <%- include('partials/scripts') %>
+</body>
+</html>

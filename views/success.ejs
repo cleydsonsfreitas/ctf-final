@@ -1,0 +1,27 @@
+<div class="success-page">
+  <div class="success-card">
+    <div class="success-icon">🎉</div>
+    <h1>Parabéns!</h1>
+    <p class="success-message">Você resolveu o desafio <strong><%= challenge.title %></strong></p>
+    
+    <div class="success-stats">
+      <div class="stat">
+        <span class="stat-value"><%= submission.points_earned %></span>
+        <span class="stat-label">Pontos Ganhos</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value"><%= Math.floor(submission.time_taken / 60) %>m <%= submission.time_taken % 60 %>s</span>
+        <span class="stat-label">Tempo</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value"><%= challenge.difficulty %></span>
+        <span class="stat-label">Dificuldade</span>
+      </div>
+    </div>
+
+    <div class="success-actions">
+      <a href="/dashboard" class="btn btn-primary">Ir para o Dashboard</a>
+      <a href="/activities" class="btn btn-secondary">Ver Atividades</a>
+    </div>
+  </div>
+</div>

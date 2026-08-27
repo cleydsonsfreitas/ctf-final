@@ -1,0 +1,90 @@
+<div class="dashboard">
+  <div class="dashboard-header">
+    <div class="user-ranking">
+      <span class="ranking-label">Seu Ranking</span>
+      <span class="ranking-value">#<%= userRank %></span>
+      <span class="ranking-score"><%= user.total_score %> pts</span>
+    </div>
+    <div class="user-info">
+      <span class="username"><%= user.username %></span>
+      <span class="user-score"><%= user.total_score %> pts</span>
+    </div>
+  </div>
+
+  <div class="dashboard-stats">
+    <div class="stat-card">
+      <h3>Desafios Totais</h3>
+      <p class="stat-value"><%= challenges.length %></p>
+    </div>
+    <div class="stat-card">
+      <h3>Resolvidos</h3>
+      <p class="stat-value" id="solvedCount">0</p>
+    </div>
+    <div class="stat-card">
+      <h3>Pontuação Total</h3>
+      <p class="stat-value"><%= user.total_score %></p>
+    </div>
+  </div>
+
+  <section class="recent-activity">
+    <h2>Atividade Recente</h2>
+    <div class="activity-list" id="activityList">
+      <% if (recentActivity.length === 0) { %>
+        <p class="empty-state">Nenhuma atividade recente</p>
+      <% } else { %>
+        <% recentActivity.forEach(activity => { %>
+        <div class="activity-item">
+          <div class="activity-user">
+            <span class="user-badge"><%= activity.username.charAt(0).toUpperCase() %></span>
+            <span><%= activity.username %></span>
+          </div>
+          <div class="activity-challenge">
+            <span class="difficulty <%= activity.difficulty.toLowerCase() %>"><%= activity.difficulty %></span>
+            <%= activity.title %>
+          </div>
+          <div class="activity-points">+<%= activity.points_earned %> pts</div>
+          <div class="activity-time"><%= new Date(activity.created_at).toLocaleString('pt-BR') %></div>
+        </div>
+        <% }) %>
+      <% } %>
+    </div>
+  </section>
+
+  <section class="quick-actions">
+    <h2>Acesso Rápido</h2>
+    <div class="action-buttons">
+      <a href="/activities" class="btn btn-secondary">Ver Atividades</a>
+      <a href="/ranking" class="btn btn-outline">Ver Ranking</a>
+    </div>
+  </section>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let homeClickCount = 0;
+    const homeBtn = document.querySelector('.nav-btn[href="/dashboard"]');
+    
+    homeBtn?.addEventListener('click', (e) => {
+      homeClickCount++;
+      if (homeClickCount > 2) {
+        e.preventDefault();
+        window.location.reload();
+      }
+      setTimeout(() => { homeClickCount = 0; }, 1000);
+    });
+
+    async function loadSolvedCount() {
+      try {
+        const response = await fetch('/api/user/solved-count');
+        if (response.ok) {
+          const data = await response.json();
+          document.getElementById('solvedCount').textContent = data.count;
+        }
+      } catch (err) {
+        console.error('Erro ao carregar contagem:', err);
+      }
+    }
+
+    loadSolvedCount();
+  });
+</script>

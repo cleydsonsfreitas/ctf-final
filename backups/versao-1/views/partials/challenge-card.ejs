@@ -1,0 +1,16 @@
+<article class="challenge-card <%= solved ? 'solved' : '' %>" data-id="<%= challenge.id %>">
+  <div class="challenge-header">
+    <span class="challenge-category"><%= challenge.category %></span>
+    <span class="challenge-difficulty <%= challenge.difficulty.toLowerCase() %>"><%= challenge.difficulty %></span>
+  </div>
+  <h3 class="challenge-title"><%= challenge.title %></h3>
+  <p class="challenge-description"><%= challenge.description %></p>
+  <div class="challenge-footer">
+    <span class="challenge-points"><%= challenge.points_base %> pts base</span>
+    <% if (solved) { %>
+    <span class="solved-badge">✓ Resolvido</span>
+    <% } else { %>
+    <a href="/challenge/<%= challenge.id %>" class="btn btn-sm btn-primary">Iniciar</a>
+    <% } %>
+  </div>
+</article>

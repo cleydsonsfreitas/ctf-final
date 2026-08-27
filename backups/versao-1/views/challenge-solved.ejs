@@ -1,0 +1,18 @@
+<div class="challenge-page solved-page">
+  <div class="challenge-header">
+    <div class="challenge-meta">
+      <span class="challenge-category"><%= challenge.category %></span>
+      <span class="challenge-difficulty <%= challenge.difficulty.toLowerCase() %>"><%= challenge.difficulty %></span>
+    </div>
+    <h1><%= challenge.title %></h1>
+    <div class="solved-badge-large">✓ Desafio Resolvido</div>
+  </div>
+
+  <div class="challenge-content">
+    <div class="solved-message">
+      <h2>Parabéns!</h2>
+      <p>Você já resolveu este desafio anteriormente.</p>
+      <a href="/activities" class="btn btn-primary">Voltar às Atividades</a>
+    </div>
+  </div>
+</div>
